@@ -152,3 +152,7 @@ PUT `/update-config-locations`
 DELETE `delete-config-location/<location>`
 - not to be used very often only when removing or deprecating old translations
 - `curl -X DELETE localhost:3000/delete-config-location/moduleOneEn`
+
+If username or password are set in your config these must be passed via basic auth.
+
+
