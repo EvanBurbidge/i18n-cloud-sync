@@ -16,7 +16,7 @@ const healthCheck = (req, resp) => resp.json({ msg: 'everything is grand' });
 router.get('/', healthCheck);
 router.get('/health', healthCheck);
 
-router.get('/locations', (req, resp) => resp.json(Object.keys(config.locations)));
+router.get('/locations', (req, resp) => resp.json(config.locations));
 
 router.get('/:location', async (req, resp) => {
   try {

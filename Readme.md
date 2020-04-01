@@ -30,12 +30,46 @@ This github repo shows an example on how to use this project within your organiz
 ### Docker
 i18n-sync is available on docker hub [ thewebuiguy/i18n-sync ] the image expects you to have a config.json setup. 
 
-### Node
-To run i18n-sync in Node, run the following command: npx @thewebuiguy/i18n-sync config.json
+## Configuration File
+i18n-sync expects a config.json file to be present in the application, this will allow you to password protect your projects in which you must
+provide a username and password. Here are a list of properties you must provide for this project to be able to work.
 
-It is available as @thewebuiguy/i18n-sync on npm.
+- `region` - the region of aws that you are using if you are using aws.
+- `locations` - this is an object of key value pairs which shows where your different translation files live.
+- `username` - (OPTIONAL) the username that will be used by your CI in order to login via basic auth
+- `password` - (OPTIONAL) the password that needs to be used by your CI in order to login via basic auth
+- `s3Endpoint` - (OPTIONAL) used for digital ocean spaces and also for aws
+- `port` - (OPTIONAL) allows you to spin the project up on another port.
 
-The default web server port is 5000. To run web server with a custom port, se the PORT ENV variable.
+### Config File Example
 
-$ PORT=8080 npx import-map-deployer config.json
-
+#### Option 1 JSON File
+```json
+{
+    "username": "username",
+    "password": "password",
+    "region": "eu-west-1",
+    "s3Endpoint": "http://mycdn.com",
+    "locations": {
+      "moduleOneEn": "s3://mycdn.com/en.json",
+      "moduleOneDe": "s3://mycdn.com/de.json"
+    }
+}
+```
+#### Option 2 .js File
+```javascript
+module.exports = {
+    "username": process.env.HTTP_USERNAME,
+    "password": process.env.HTTP_PASSWORD,
+    "region": "eu-west-1",
+    "s3Endpoint": "http://mycdn.com",
+    "locations": {
+      "moduleOneEn": "s3://mycdn.com/en.json",
+      "moduleOneDe": "s3://mycdn.com/de.json"
+    }
+}
+```
+** Note in order to do this you must change the start command in your docker file e.g. 
+```
+CMD ['npm', 'start', 'conf.js']
+```

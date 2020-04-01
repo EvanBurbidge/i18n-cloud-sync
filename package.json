@@ -1,5 +1,5 @@
 {
-  "name": "i18n-s3Sync",
+  "name": "@thewebuiguy/i18n-sync",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

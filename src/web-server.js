@@ -22,4 +22,4 @@ app.use(auth);
 app.use('/', router);
 
 
-app.listen(config.port || 3000, () => console.warn('listening on 3000'));
+app.listen(config.port || 3000, () => console.warn(`listening on ${config.port || 3000}`));
