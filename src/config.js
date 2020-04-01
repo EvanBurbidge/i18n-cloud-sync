@@ -18,7 +18,7 @@ if (argv._.length === 0) {
   }
 }
 
-exports.config = config
+exports.config = config;
 
-exports.setConfig = (newConfig) => config = newConfig
-exports.getConfig = () => config
+exports.setConfig = (newConfig) => config = newConfig;
+exports.getConfig = () => config;
