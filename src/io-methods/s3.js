@@ -24,7 +24,7 @@ exports.readTranslations = filePath => new Promise((resolve, reject) => {
   })
 });
 
-exports.writeTranslations = (filePath, data) => new Promise(function(resolve, reject) {
+exports.writeTranslations = (filePath, data) => new Promise(async(resolve, reject) => {
   const file = parseFilePathForS3(filePath);
   s3.putObject({
     Bucket: file.bucket,

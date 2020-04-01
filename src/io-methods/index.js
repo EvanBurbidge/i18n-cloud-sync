@@ -1,13 +1,13 @@
-const _ = require('lodash');
 const s3 = require('./s3');
-const { config } = require('../config');
+const { getConfig } = require('../config');
 const { usesS3 } = require('../utils');
 const { updateConfigLocations, deleteConfigLocation } = require('./filesystem');
 
 
 const getFilePath = lng => {
-  if (config.locations[lng]) {
-    return config.locations[lng];
+  const conf = getConfig();
+  if (conf.locations[lng]) {
+    return conf.locations[lng];
   }
   return '';
 };
@@ -22,7 +22,7 @@ const readTranslations = async lng => {
 const writeTranslations = async (lng, data) => {
   const filePath = getFilePath(lng);
   if (filePath.length === 0) {
-    throw Error('this location does not exist');
+    throw Error('this location does not exist please add it to your locations');
   }
   if (usesS3(filePath)) {
     return await s3.writeTranslations(filePath, data);

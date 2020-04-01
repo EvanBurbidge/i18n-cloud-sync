@@ -16,11 +16,11 @@ const healthCheck = (req, resp) => resp.json({ msg: 'everything is grand' });
 router.get('/', healthCheck);
 router.get('/health', healthCheck);
 
-router.get('/languages', (req, resp) => resp.json(Object.keys(config.locations)));
+router.get('/locations', (req, resp) => resp.json(Object.keys(config.locations)));
 
 router.get('/:location', async (req, resp) => {
   try {
-    const data = await readTranslations(req.params.language);
+    const data = await readTranslations(req.params.location);
     return resp.json(data);
   } catch (e) {
     resp.status(500).json(e);
@@ -33,7 +33,7 @@ router.post('/update/:location', async (req, resp) => {
     resp.status(400).send('you must supply translations to write')
   } else {
     try {
-      const data = await writeTranslations(req.params.language, translations);
+      const data = await writeTranslations(req.params.location, translations);
       return resp.json(data);
     } catch (e) {
       console.error(e);
@@ -60,6 +60,5 @@ router.delete('/remove-config-location/:key', (req, resp) => {
   const returnable = deleteConfigLocation(key);
   resp.status(200).json(returnable);
 });
-
 
 module.exports = router;
