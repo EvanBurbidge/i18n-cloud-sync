@@ -24,7 +24,7 @@ The i18n-sync’s web server is only exposed within your VPC.
 Your CI runners should either be within the VPC or tunnel into it when calling the i18n-sync.
 The i18n-sync has HTTP basic authentication enabled, and only the CI runners know the username and password.
 ## Example Usage
-This github repo shows an example on how to use this project within your organization.
+[This github repo](https://github.com/EvanBurbidge/i18n-sync-example) shows an example on how to use this project within your organization.
 ## Installation and usage
 
 ### Docker
