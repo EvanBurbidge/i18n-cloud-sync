@@ -30,16 +30,6 @@ This github repo shows an example on how to use this project within your organiz
 ### Docker
 i18n-sync is available on docker hub [ thewebuiguy/i18n-sync ] the image expects you to have a config.json setup. 
 
-### Node
-To run the i18n-sync in Node, run the following command: npx i18n-sync config.json
-
-It is available as i18n-sync on npm.
-
-The default web server port is 5000. To run web server with a custom port, se the PORT ENV variable.
-
-$ PORT=8080 npx i18n-sync config.json
-
-
 ## Configuration File
 i18n-sync expects a config.json file to be present in the application, this will allow you to password protect your projects in which you must
 provide a username and password. Here are a list of properties you must provide for this project to be able to work.
