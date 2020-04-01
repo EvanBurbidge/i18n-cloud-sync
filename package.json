@@ -2,7 +2,10 @@
   "name": "@thewebuiguy/i18n-sync",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/web-server.js",
+  "bin": {
+    "i18n-sync": "./bin/i18n-sync"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/web-server.js"
