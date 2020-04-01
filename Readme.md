@@ -30,6 +30,14 @@ The i18n-sync has HTTP basic authentication enabled, and only the CI runners kno
 ### Docker
 i18n-sync is available on docker hub [ thewebuiguy/i18n-sync ] the image expects you to have a config.json setup. 
 
+### Node
+i18n-sync is available as an npm package
+```npm install i18n-cloud-sync ```
+
+or run it directly via
+```npx i18n-cloud-sync config.json```
+ 
+
 ## Configuration File
 i18n-sync expects a config.json file to be present in the application, this will allow you to password protect your projects in which you must
 provide a username and password. Here are a list of properties you must provide for this project to be able to work.
