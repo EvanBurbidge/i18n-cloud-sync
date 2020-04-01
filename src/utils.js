@@ -14,6 +14,15 @@ const parseFilePathForS3 = (filePath) => {
   }
 };
 
+const parseFilePathForGoogle = filePath => {
+  const regex = /^google:\/\/(.+)\/(.+)$/
+  const [_, bucketName, fileName] = regex.exec(filePath)
+  if (!bucketName || !fileName) {
+    throw Error(`Invalid Google Cloud Storage url: ${filePath}`)
+  }
+  return {bucketName, fileName}
+};
+
 const confirmAuth = config => {
   if ( (typeof config.username === 'string' && typeof config.password === 'string')
     || (config.username === undefined && config.password === undefined) ) {
@@ -27,11 +36,14 @@ const confirmAuth = config => {
 };
 
 const usesS3 = filePath => filePath.startsWith('spaces://') || filePath.startsWith('s3://');
+const usesGoogle = filePath => filePath.startsWith('google://');
 
 
 module.exports = {
   usesS3,
+  usesGoogle,
   confirmAuth,
   parseFilePathForS3,
+  parseFilePathForGoogle,
   getJsPath,
-}
+};
