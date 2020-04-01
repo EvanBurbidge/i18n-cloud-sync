@@ -1,9 +1,9 @@
 {
-  "region": "eu-west-1",
-  "s3Url": "http://cdn.i18ncore-api.com",
+  "s3Endpoint": "https://fra1.digitaloceanspaces.com",
   "locations": {
     "en": "s3://cdn.i18ncore-api.com/i18n-translations/en.json",
     "de": "s3://cdn.i18ncore-api.com/i18n-translations/de.json",
-    "enGcloud": "google://i18n-sync-translations/en.json"
+    "enGcloud": "google://i18n-sync-translations/en.json",
+    "enSpaces": "spaces://i18n-translations-sync.fra1.digitaloceanspaces.com/en.json"
   }
 }
