@@ -1,7 +1,10 @@
 const s3 = require('./s3');
 const { getConfig } = require('../config');
-const { usesS3 } = require('../utils');
+const { usesS3, confirmAuth } = require('../utils');
 const { updateConfigLocations, deleteConfigLocation } = require('./filesystem');
+
+
+const { username, password } = confirmAuth(getConfig());
 
 
 const getFilePath = lng => {
@@ -33,5 +36,7 @@ module.exports = {
   updateConfigLocations,
   deleteConfigLocation,
   writeTranslations,
-  readTranslations
-}
+  readTranslations,
+  username,
+  password,
+};

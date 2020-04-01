@@ -1,1 +1,8 @@
-{"region":"eu-west-1","s3Url":"http://cdn.i18ncore-api.com","locations":{"en":"s3://cdn.i18ncore-api.com/i18n-translations/en.json","de":"s3://cdn.i18ncore-api.com/i18n-translations/de.json"}}
+{
+  "region": "eu-west-1",
+  "s3Url": "http://cdn.i18ncore-api.com",
+  "locations": {
+    "en": "s3://cdn.i18ncore-api.com/i18n-translations/en.json",
+    "de": "s3://cdn.i18ncore-api.com/i18n-translations/de.json"
+  }
+}

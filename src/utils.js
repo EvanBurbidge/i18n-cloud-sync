@@ -1,8 +1,8 @@
 const isDigitalOcean = file => file.startsWith('spaces://');
 
-exports.getJsPath = filePath => filePath.substring(0, filePath.lastIndexOf('.')) + '.js';
+const getJsPath = filePath => filePath.substring(0, filePath.lastIndexOf('.')) + '.js';
 
-exports.parseFilePathForS3 = (filePath) => {
+const parseFilePathForS3 = (filePath) => {
   const prefix = isDigitalOcean(filePath) ? 'spaces://' : 's3://'
   const file = filePath.split(prefix)[1]
   const bucketDelimiter = isDigitalOcean(filePath) ? '.' : '/'
@@ -14,7 +14,7 @@ exports.parseFilePathForS3 = (filePath) => {
   }
 };
 
-exports.confirmAuth = config => {
+const confirmAuth = config => {
   if ( (typeof config.username === 'string' && typeof config.password === 'string')
     || (config.username === undefined && config.password === undefined) ) {
     return {
@@ -26,4 +26,12 @@ exports.confirmAuth = config => {
   }
 };
 
-exports.usesS3 = filePath => filePath.startsWith('spaces://') || filePath.startsWith('s3://');
+const usesS3 = filePath => filePath.startsWith('spaces://') || filePath.startsWith('s3://');
+
+
+module.exports = {
+  usesS3,
+  confirmAuth,
+  parseFilePathForS3,
+  getJsPath,
+}

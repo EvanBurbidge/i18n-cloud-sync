@@ -10,7 +10,7 @@ const s3 = new aws.S3({
   apiVersion: '2006-03-01'
 });
 
-exports.readTranslations = filePath => new Promise((resolve, reject) => {
+const readTranslations = filePath => new Promise((resolve, reject) => {
   let file = parseFilePathForS3(filePath);
   s3.getObject({
     Bucket: file.bucket,
@@ -24,7 +24,7 @@ exports.readTranslations = filePath => new Promise((resolve, reject) => {
   })
 });
 
-exports.writeTranslations = (filePath, data) => new Promise(async(resolve, reject) => {
+const writeTranslations = (filePath, data) => new Promise(async(resolve, reject) => {
   const file = parseFilePathForS3(filePath);
   s3.putObject({
     Bucket: file.bucket,
@@ -41,14 +41,7 @@ exports.writeTranslations = (filePath, data) => new Promise(async(resolve, rejec
   });
 });
 
-exports.writeNewTranslationsFile = (filePath, data) => new Promise(async (resolve, reject) => {
-  const file = parseFilePathForS3(filePath);
-  try {
-    await s3.headObject({
-      Bucket: file.bucket,
-      Key: file.key,
-    }).promise();
-  } catch (e) {
-    console.log('file does not exist');
-  }
-});
+module.exports = {
+  readTranslations,
+  writeTranslations,
+};
