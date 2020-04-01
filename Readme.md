@@ -16,7 +16,7 @@ Companies may have a hard time with translations. Managing multiple projects, re
 This project also means that you won’t be encountering anymore merging errors with your translations files, if two people publish at the same time then the endpoint is called twice to update the file twice. This will avoid any race conditions and the possibility of lost work. 
 
 ## Security
-The i18n-sync must have read / write access to the CDN / bucket that is storing your production import map. It exposes a web server that allows for modifying the state of your production application. It is password protected with HTTP basic authentication.
+The i18n-sync must have read / write access to the CDN / bucket that is storing your translations. It exposes a web server that allows for modifying the state of your production application. It is password protected with HTTP basic authentication.
 
 The following security constraints are highly recommended to secure the i18n-sync.
  
@@ -95,7 +95,7 @@ config.json:
 ```
 
 ### Digital Ocean Spaces
-If your translations files are hosted on Digital Ocean Spaces, you can use the api to modify the import map file by specifying in your config spaces:// in the locations config object.
+If your translations files are hosted on Digital Ocean Spaces, you can use the api to modify translations files by specifying in your config spaces:// in the locations config object.
 
 The format of the string is spaces://bucket-name.digital-ocean-domain-stuff.com/file-name.json. Note that the name of the Bucket is everything after spaces:// and before the first . character.
 
