@@ -1,8 +1,9 @@
 {
-  "name": "i18n-sync",
+  "name": "@thewebuiguy/i18n-sync",
   "version": "1.0.0",
   "description": "A restful api which allows you to sync translations from local projects to cloud based locations",
   "main": "src/web-server.js",
+  "private": false,
   "bin": {
     "i18n-sync": "./bin/i18n-sync"
   },
