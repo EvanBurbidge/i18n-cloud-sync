@@ -94,10 +94,19 @@ config.json:
 }
 ```
 
-### AWS
+### Digital Ocean Spaces
+If your translations files are hosted on Digital Ocean Spaces, you can use the api to modify the import map file by specifying in your config spaces:// in the locations config object.
+
+The format of the string is spaces://bucket-name.digital-ocean-domain-stuff.com/file-name.json. Note that the name of the Bucket is everything after spaces:// and before the first . character.
+
+Since the API Digital Ocean Spaces is compatible with the AWS S3 API, i18n-sync uses aws-sdk to communicate with Digital Ocean Spaces. As such, all options that can be passed for AWS S3 also are applied to Digital Ocean Spaces. You need to provide AWS CLI environment variables for authentication with Digital Ocean Spaces, since i18n-sync is using aws-sdk to communicate with Digital Ocean.
+
+Instead of an AWS region, you should provide an s3Endpoint config value that points to a Digital Ocean region.
+
+config.json:
 ```json
 {
-  "s3Endpoint": "https://mycdn.com",
+  "s3Endpoint": "https://nyc3.digitaloceanspaces.com",
   "locations": {
     "moduleOneEn": "spaces://mycdn.com/en.json",  
     "moduleOneDe": "spaces://mycdn.com/de.json"  
@@ -105,6 +114,9 @@ config.json:
 }
 ```
 ### Google Cloud
+Note that you must have the GOOGLE_APPLICATION_CREDENTIALS environment variable set for authentication.
+
+config.json:
 ```json
 {
   "locations": {
@@ -113,3 +125,30 @@ config.json:
   }
 }
 ```
+
+
+## Endpoints
+
+GET `/health`
+- will run a health check to see the server is running
+
+GET `/locations`
+- will return an overview of available locations
+- `curl -i localhost:3000/locations`
+
+GET `/<location>`
+- will return the assets available at that location
+- `curl -i localhost:3000/moduleOneEn -> {... some translations}`
+
+POST `/update/<location>`
+- must includes a translations object in the body
+- will update the given location with data passed into it via the request body
+- `curl -d { "translations": { "key": "translation" } } -X POST localhost:3000/update/moduleOneEn`
+
+PUT `/update-config-locations`
+- will update configuration locations in your config file
+- `curl -d { "key": "moduleTwoEn", "value":"s3://mycdn.com/moduleTwoEn.json" } -X PUT localhost:3000/update-config-locations`
+
+DELETE `delete-config-location/<location>`
+- not to be used very often only when removing or deprecating old translations
+- `curl -X DELETE localhost:3000/delete-config-location/moduleOneEn`
