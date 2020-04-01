@@ -73,3 +73,43 @@ module.exports = {
 ```
 CMD ['npm', 'start', 'conf.js']
 ```
+
+## Supported Provider Examples
+### AWS
+If your translations files file is hosted by AWS S3, you can use this project to modify the s by specifying in your config s3:// in the locations config object.
+
+The format of the string is s3://bucket-name/file-name.json
+
+i18n-sync relies on the  [AWS_DEFAULT_REGION environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) for authentication with S3.
+
+config.json:
+```json
+{
+  "region": "eu-west-1",
+  "s3Endpoint": "https://mycdn.com",
+  "locations": {
+    "moduleOneEn": "s3://mycdn.com/en.json",  
+    "moduleOneDe": "s3://mycdn.com/de.json"  
+  }
+}
+```
+
+### AWS
+```json
+{
+  "s3Endpoint": "https://mycdn.com",
+  "locations": {
+    "moduleOneEn": "spaces://mycdn.com/en.json",  
+    "moduleOneDe": "spaces://mycdn.com/de.json"  
+  }
+}
+```
+### Google Cloud
+```json
+{
+  "locations": {
+    "moduleOneEn": "google://bucketname/en.json",  
+    "moduleOneDe": "spaces://mycdn.com/de.json"  
+  }
+}
+```
