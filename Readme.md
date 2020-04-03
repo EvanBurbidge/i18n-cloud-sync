@@ -133,7 +133,20 @@ config.json:
   }
 }
 ```
+### Azure Storage
+Note, that you must have environment variables *AZURE_STORAGE_ACCOUNT* and *AZURE_STORAGE_ACCESS_KEY*, or *AZURE_STORAGE_CONNECTION_STRING* defined for authentication.
 
+config.json:
+```json
+{
+  "locations": {
+    "azureEn": {
+      "azureContainer": "i18ntranslationssync",
+      "azureBlob": "en.json"
+    }
+  }
+}
+```
 
 ## Endpoints
 

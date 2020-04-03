@@ -1,3 +1,5 @@
+const isObject = require('lodash/isObject');
+
 const isDigitalOcean = file => file.startsWith('spaces://');
 
 const getJsPath = filePath => filePath.substring(0, filePath.lastIndexOf('.')) + '.js';
@@ -35,12 +37,13 @@ const confirmAuth = config => {
   }
 };
 
-const usesS3 = filePath => filePath.startsWith('spaces://') || filePath.startsWith('s3://');
 const usesGoogle = filePath => filePath.startsWith('google://');
-
+const usesS3 = filePath => filePath.startsWith('spaces://') || filePath.startsWith('s3://');
+const usesAzure = (filePath) => isObject(filePath) && filePath.azureContainer && filePath.azureBlob;
 
 module.exports = {
   usesS3,
+  usesAzure,
   usesGoogle,
   confirmAuth,
   parseFilePathForS3,

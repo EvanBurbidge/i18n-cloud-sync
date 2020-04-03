@@ -1,8 +1,9 @@
 const s3 = require('./s3');
+const azure = require('./azure');
 const google = require('./google-storage');
 
 const { getConfig } = require('../config');
-const { usesS3, usesGoogle, confirmAuth } = require('../utils');
+const { usesS3, usesGoogle, usesAzure, confirmAuth } = require('../utils');
 const { updateConfigLocations, deleteConfigLocation } = require('./filesystem');
 
 
@@ -19,24 +20,36 @@ const getFilePath = lng => {
 
 const readTranslations = async lng => {
   const filePath = getFilePath(lng);
-  if (usesGoogle(filePath)) {
-    return await google.readTranslations(filePath);
-  }
-  if (usesS3(filePath)) {
-    return await s3.readTranslations(filePath);
+  if (typeof filePath === 'object') {
+    if (usesAzure(filePath)) {
+      return await azure.readTranslations(filePath)
+    }
+  } else {
+    if (usesGoogle(filePath)) {
+      return await google.readTranslations(filePath);
+    }
+    if (usesS3(filePath)) {
+      return await s3.readTranslations(filePath);
+    }
   }
 };
 
 const writeTranslations = async (lng, data) => {
   const filePath = getFilePath(lng);
-  if (filePath.length === 0) {
-    throw Error('this location does not exist please add it to your locations');
-  }
-  if (usesGoogle(filePath)) {
-    return await google.writeTranslations(filePath, data);
-  }
-  if (usesS3(filePath)) {
-    return await s3.writeTranslations(filePath, data);
+  if (typeof filePath === 'object') {
+    if (usesAzure(filePath)) {
+      return await azure.writeTranslations(filePath, data);
+    }
+  } else {
+    if (filePath.length === 0) {
+      throw Error('this location does not exist please add it to your locations');
+    }
+    if (usesGoogle(filePath)) {
+      return await google.writeTranslations(filePath, data);
+    }
+    if (usesS3(filePath)) {
+      return await s3.writeTranslations(filePath, data);
+    }
   }
 };
 
