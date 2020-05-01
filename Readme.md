@@ -1,12 +1,14 @@
-# i18n-sync
-I18n-sync is a simple node js project that provides a restful api for syncing translations, and their locations to the cloud. All work is done via restful api calls in order to update files and configurations. 
+![i18n-cloud-sync-logo](./i18n-logo.png)
+# i18n-cloud-sync
+i18n-cloud-sync is a simple node js project that provides a restful api for syncing translations, and their locations to the cloud. All work is done via restful api calls in order to update files and configurations. 
 
 ## Supported Providers
-At the moment i18n-sync caters for
+At the moment i18n-cloud-sync caters for
 
 - AWS S3
 - Google Cloud Storage
 - Digital Ocean Spaces
+- Azure
 
 Future deployments will cater for Azure and other providers, and also for a filesystem based solution. 
 
@@ -16,22 +18,22 @@ Companies may have a hard time with translations. Managing multiple projects, re
 This project also means that you won’t be encountering anymore merging errors with your translations files, if two people publish at the same time then the endpoint is called twice to update the file twice. This will avoid any race conditions and the possibility of lost work. 
 
 ## Security
-The i18n-sync must have read / write access to the CDN / bucket that is storing your translations. It exposes a web server that allows for modifying the state of your production application. It is password protected with HTTP basic authentication.
+The i18n-cloud-sync must have read / write access to the CDN / bucket that is storing your translations. It exposes a web server that allows for modifying the state of your production application. It is password protected with HTTP basic authentication.
 
-The following security constraints are highly recommended to secure the i18n-sync.
+The following security constraints are highly recommended to secure the i18n-cloud-sync.
  
-The i18n-sync’s web server is only exposed within your VPC.
-Your CI runners should either be within the VPC or tunnel into it when calling the i18n-sync.
-The i18n-sync has HTTP basic authentication enabled, and only the CI runners know the username and password.
+The i18n-cloud-sync’s web server is only exposed within your VPC.
+Your CI runners should either be within the VPC or tunnel into it when calling the i18n-cloud-sync.
+The i18n-cloud-sync has HTTP basic authentication enabled, and only the CI runners know the username and password.
 ## Example Usage
-[This github repo](https://github.com/EvanBurbidge/i18n-sync-example) shows an example on how to use this project within your organization.
+[This github repo](https://github.com/EvanBurbidge/i18n-cloud-sync-example) shows an example on how to use this project within your organization.
 ## Installation and usage
 
 ### Docker
-i18n-sync is available on docker hub [ thewebuiguy/i18n-sync ] the image expects you to have a config.json setup. 
+i18n-cloud-sync is available on docker hub [ thewebuiguy/i18n-cloud-sync ] the image expects you to have a config.json setup. 
 
 ### Node
-i18n-sync is available as an npm package
+i18n-cloud-sync is available as an npm package
 ```npm install i18n-cloud-sync ```
 
 or run it directly via
@@ -39,7 +41,7 @@ or run it directly via
  
 
 ## Configuration File
-i18n-sync expects a config.json file to be present in the application, this will allow you to password protect your projects in which you must
+i18n-cloud-sync expects a config.json file to be present in the application, this will allow you to password protect your projects in which you must
 provide a username and password. Here are a list of properties you must provide for this project to be able to work.
 
 - `region` - the region of aws that you are using if you are using aws.
@@ -88,7 +90,7 @@ If your translations files file is hosted by AWS S3, you can use this project to
 
 The format of the string is s3://bucket-name/file-name.json
 
-i18n-sync relies on the  [AWS_DEFAULT_REGION environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) for authentication with S3.
+i18n-cloud-sync relies on the  [AWS_DEFAULT_REGION environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) for authentication with S3.
 
 config.json:
 ```json
@@ -107,7 +109,7 @@ If your translations files are hosted on Digital Ocean Spaces, you can use the a
 
 The format of the string is spaces://bucket-name.digital-ocean-domain-stuff.com/file-name.json. Note that the name of the Bucket is everything after spaces:// and before the first . character.
 
-Since the API Digital Ocean Spaces is compatible with the AWS S3 API, i18n-sync uses aws-sdk to communicate with Digital Ocean Spaces. As such, all options that can be passed for AWS S3 also are applied to Digital Ocean Spaces. You need to provide AWS CLI environment variables for authentication with Digital Ocean Spaces, since i18n-sync is using aws-sdk to communicate with Digital Ocean.
+Since the API Digital Ocean Spaces is compatible with the AWS S3 API, i18n-cloud-sync uses aws-sdk to communicate with Digital Ocean Spaces. As such, all options that can be passed for AWS S3 also are applied to Digital Ocean Spaces. You need to provide AWS CLI environment variables for authentication with Digital Ocean Spaces, since i18n-cloud-sync is using aws-sdk to communicate with Digital Ocean.
 
 Instead of an AWS region, you should provide an s3Endpoint config value that points to a Digital Ocean region.
 
