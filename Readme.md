@@ -1,4 +1,4 @@
-![i18n-cloud-sync-logo](./i18n-logo.png)
+![i18n-cloud-sync-logo](http://cdn.i18ncore-api.com/i18n-logo.png)
 # i18n-cloud-sync
 i18n-cloud-sync is a simple node js project that provides a restful api for syncing translations, and their locations to the cloud. All work is done via restful api calls in order to update files and configurations. 
 
