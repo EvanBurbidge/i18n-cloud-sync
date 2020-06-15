@@ -18,7 +18,7 @@ router.get('/health', healthCheck);
 
 router.get('/locations', (req, resp) => resp.json(config.locations));
 
-router.get('/locations/:location', async (req, resp) => {
+router.get('/:location', async (req, resp) => {
   try {
     const data = await readTranslations(req.params.location);
     return resp.json(data);
