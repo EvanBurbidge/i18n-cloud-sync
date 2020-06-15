@@ -15,7 +15,6 @@ const s3 = new aws.S3({
 
 const readTranslations = filePath => new Promise((resolve, reject) => {
   let file = parseFilePathForS3(filePath);
-  console.log(file);
   s3.getObject({
     Bucket: file.bucket,
     Key: file.key,

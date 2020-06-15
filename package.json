@@ -1,6 +1,6 @@
 {
   "name": "i18n-cloud-sync",
-  "version": "1.2.2",
+  "version": "1.2.1",
   "description": "A restful api which allows you to sync translations from local projects to cloud based locations",
   "main": "src/web-server.js",
   "private": false,
