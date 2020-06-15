@@ -23,6 +23,7 @@ router.get('/:location', async (req, resp) => {
     const data = await readTranslations(req.params.location);
     return resp.json(data);
   } catch (e) {
+    console.error(e);
     resp.status(500).json(e);
   }
 });
@@ -37,6 +38,7 @@ router.post('/update/:location', async (req, resp) => {
       return resp.json(data);
     } catch (e) {
       console.error(e);
+      resp.status(500).json(e);
     }
   }
 });
@@ -47,6 +49,7 @@ router.put('/update-config-location', (req, resp) => {
     return resp.status(400).send('bad request location is not provided');
   }
   const returnable = JSON.parse(updateConfigLocations(key, value));
+  delete returnable.password;
   resp.status(200).json({
     returnable
   });
