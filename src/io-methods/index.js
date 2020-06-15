@@ -29,6 +29,7 @@ const readTranslations = async lng => {
       return await google.readTranslations(filePath);
     }
     if (usesS3(filePath)) {
+      console.log(filePath);
       return await s3.readTranslations(filePath);
     }
   }

@@ -4,7 +4,7 @@ const { config } = require('../config');
 
 const getConfigFile = () => path.resolve(__dirname, '../..', 'config.json');
 
-const updateConfigLocations = (key, value) => {
+const updateConfigLocations = (key, value) => new Promise((resolve, reject) => {
   const toWrite = JSON.stringify({
     ...config,
     locations: {
@@ -12,9 +12,12 @@ const updateConfigLocations = (key, value) => {
       [key]: value,
     }
   });
-  fs.writeFileSync(getConfigFile(), toWrite, 'utf8');
-  return toWrite;
-};
+  fs.writeFile(getConfigFile(), toWrite, 'utf8', (err, data) => {
+    delete toWrite.password;
+    if(err) reject(err);
+    resolve(JSON.parse(toWrite));
+  });
+});
 
 
 const deleteConfigLocation = location => {

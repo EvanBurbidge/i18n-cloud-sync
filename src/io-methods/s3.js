@@ -15,13 +15,16 @@ const s3 = new aws.S3({
 
 const readTranslations = filePath => new Promise((resolve, reject) => {
   let file = parseFilePathForS3(filePath);
+  console.log(file);
   s3.getObject({
     Bucket: file.bucket,
     Key: file.key,
   }, (err, data) => {
     if (err) {
+      console.log(err);
       reject(err);
     } else {
+      console.log(data);
       resolve(JSON.parse(data.Body.toString()));
     }
   })

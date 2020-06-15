@@ -18,7 +18,7 @@ router.get('/health', healthCheck);
 
 router.get('/locations', (req, resp) => resp.json(config.locations));
 
-router.get('/:location', async (req, resp) => {
+router.get('/locations/:location', async (req, resp) => {
   try {
     const data = await readTranslations(req.params.location);
     return resp.json(data);
@@ -43,16 +43,22 @@ router.post('/update/:location', async (req, resp) => {
   }
 });
 
-router.put('/update-config-location', (req, resp) => {
+router.put('/update-config-location', async (req, resp) => {
   const { key, value } = req.body;
   if (!key || !value) {
     return resp.status(400).send('bad request location is not provided');
   }
-  const returnable = JSON.parse(updateConfigLocations(key, value));
-  delete returnable.password;
+  try {
+    const returnable = await updateConfigLocations(key, value);
+    console.log(returnable);
+    // delete returnable.password;
   resp.status(200).json({
     returnable
   });
+  } catch(e) {
+    console.error(e);
+    resp.status(500).json(e);
+  }
 });
 
 router.delete('/remove-config-location/:key', (req, resp) => {
