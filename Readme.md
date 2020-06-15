@@ -48,7 +48,7 @@ provide a username and password. Here are a list of properties you must provide 
 - `locations` - this is an object of key value pairs which shows where your different translation files live.
 - `username` - (OPTIONAL) the username that will be used by your CI in order to login via basic auth
 - `password` - (OPTIONAL) the password that needs to be used by your CI in order to login via basic auth
-- `s3Endpoint` - (OPTIONAL) used for digital ocean spaces and also for aws
+- `s3Endpoint` - (OPTIONAL) used for digital ocean spaces.
 - `port` - (OPTIONAL) allows you to spin the project up on another port.
 
 ### Config File Example
